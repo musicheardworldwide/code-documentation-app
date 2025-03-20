@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Documentation App</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            padding-top: 20px;
+        }
+        .header {
+            background-color: #343a40;
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            border-radius: 0.5rem;
+        }
+        .card {
+            margin-bottom: 1.5rem;
+            border: none;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card-header {
+            background-color: #007bff;
+            color: white;
+            font-weight: bold;
+        }
+        .endpoint-card {
+            background-color: #f8f9fa;
+            border-left: 4px solid #007bff;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        .method {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+        .method-get {
+            background-color: #28a745;
+            color: white;
+        }
+        .method-post {
+            background-color: #007bff;
+            color: white;
+        }
+        .code-block {
+            background-color: #f1f1f1;
+            padding: 1rem;
+            border-radius: 0.25rem;
+            font-family: monospace;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+        .footer {
+            margin-top: 3rem;
+            padding: 1.5rem 0;
+            background-color: #343a40;
+            color: white;
+            border-radius: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header text-center">
+            <h1>Code Documentation Application</h1>
+            <p class="lead">Analyze codebases and generate comprehensive documentation using LLM technology</p>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 mb-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Application Overview</h2>
+                    </div>
+                    <div class="card-body">
+                        <p>This application analyzes GitHub repositories or zip files containing codebases and generates comprehensive documentation using LLM technology. It includes a RAG system for context-aware code understanding and can generate Q&A pairs for development and feature changes.</p>
+                        
+                        <h3>Key Features</h3>
+                        <ul>
+                            <li>Process code from GitHub repositories or zip files</li>
+                            <li>Analyze code structure and dependencies</li>
+                            <li>Generate comprehensive documentation with LLM assistance</li>
+                            <li>Create 50 Q&A items about codebase development and feature changes</li>
+                            <li>Provide context-aware code understanding through RAG</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>API Endpoints</h2>
+                    </div>
+                    <div class="card-body">
+                        <h3>Health Check</h3>
+                        <div class="endpoint-card">
+                            <span class="method method-get">GET</span>
+                            <span class="endpoint">/</span>
+                            <p>Check if the API is running</p>
+                            <h5>Response Example:</h5>
+                            <div class="code-block">
+                                {<br>
+                                &nbsp;&nbsp;"status": "healthy",<br>
+                                &nbsp;&nbsp;"message": "Code Documentation API is running"<br>
+                                }
+                            </div>
+                        </div>
+
+                        <h3>Documentation Generation</h3>
+                        <div class="endpoint-card">
+                            <span class="method method-post">POST</span>
+                            <span class="endpoint">/api/github</span>
+                            <p>Process GitHub repository and generate documentation</p>
+                            <h5>Request Example:</h5>
+                            <div class="code-block">
+                                {<br>
+                                &nbsp;&nbsp;"repo_url": "https://github.com/username/repo",<br>
+                                &nbsp;&nbsp;"output_dir": "optional/output/path",<br>
+                                &nbsp;&nbsp;"llm_config": {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;"base_url": "https://api.example.com",<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;"api_key": "your_api_key",<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;"instruct_model": "model_name",<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;"reasoning_model": "model_name",<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;"embeddings_model": "model_name"<br>
+                                &nbsp;&nbsp;}<br>
+                                }
+                            </div>
+                            <h5>Response Example:</h5>
+                            <div class="code-block">
+                                {<br>
+                                &nbsp;&nbsp;"task_id": "123e4567-e89b-12d3-a456-426614174000",<br>
+                                &nbsp;&nbsp;"status": "processing",<br>
+                                &nbsp;&nbsp;"output_dir": "/path/to/output",<br>
+                                &nbsp;&nbsp;"message": "GitHub repository processing started"<br>
+                                }
+                            </div>
+                        </div>
+
+                        <div class="endpoint-card">
+                            <span class="method method-post">POST</span>
+                            <span class="endpoint">/api/zip</span>
+                            <p>Process zip file and generate documentation</p>
+                            <h5>Request Example:</h5>
+                            <div class="code-block">
+                                {<br>
+                                &nbsp;&nbsp;"file_path": "/path/to/codebase.zip",<br>
+                                &nbsp;&nbsp;"output_dir": "optional/output/path",<br>
+                                &nbsp;&nbsp;"llm_config": {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;"base_url": "https://api.example.com",<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;"api_key": "your_api_key",<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;"instruct_model": "model_name",<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;"reasoning_model": "model_name",<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;"embeddings_model": "model_name"<br>
+                                &nbsp;&nbsp;}<br>
+                                }
+                            </div>
+                            <h5>Response Example:</h5>
+                            <div class="code-block">
+                                {<br>
+                                &nbsp;&nbsp;"task_id": "123e4567-e89b-12d3-a456-426614174000",<br>
+                                &nbsp;&nbsp;"status": "processing",<br>
+                                &nbsp;&nbsp;"output_dir": "/path/to/output",<br>
+                                &nbsp;&nbsp;"message": "Zip file processing started"<br>
+                                }
+                            </div>
+                        </div>
+
+                        <h3>Task Management</h3>
+                        <div class="endpoint-card">
+                            <span class="method method-get">GET</span>
+                            <span class="endpoint">/api/tasks/{task_id}</span>
+                            <p>Get task status</p>
+                            <h5>Response Example:</h5>
+                            <div class="code-block">
+                                {<br>
+                                &nbsp;&nbsp;"task_id": "123e4567-e89b-12d3-a456-426614174000",<br>
+                                &nbsp;&nbsp;"status": "completed",<br>
+                                &nbsp;&nbsp;"progress": 100,<br>
+                                &nbsp;&nbsp;"message": "Documentation generation completed",<br>
+                                &nbsp;&nbsp;"result": {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;"file_count": 10,<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;"function_count": 20,<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;"class_count": 5,<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;"output_path": "/path/to/output"<br>
+                                &nbsp;&nbsp;}<br>
+                                }
+                            </div>
+                        </div>
+
+                        <h3>RAG Queries</h3>
+                        <div class="endpoint-card">
+                            <span class="method method-post">POST</span>
+                            <span class="endpoint">/api/query</span>
+                            <p>Query documentation using RAG</p>
+                            <h5>Request Example:</h5>
+                            <div class="code-block">
+                                {<br>
+                                &nbsp;&nbsp;"query": "How does the authentication system work?",<br>
+                                &nbsp;&nbsp;"task_id": "123e4567-e89b-12d3-a456-426614174000",<br>
+                                &nbsp;&nbsp;"max_results": 5<br>
+                                }
+                            </div>
+                            <h5>Response Example:</h5>
+                            <div class="code-block">
+                                {<br>
+                                &nbsp;&nbsp;"query": "How does the authentication system work?",<br>
+                                &nbsp;&nbsp;"answer": "The authentication system uses JWT tokens...",<br>
+                                &nbsp;&nbsp;"context": [<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;{<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"content": "def authenticate_user(username, password): ...",<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"metadata": {"file_path": "/path/to/auth.py"},<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"distance": 0.1<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                &nbsp;&nbsp;]<br>
+                                }
+                            </div>
+                        </div>
+
+                        <h3>Q&A Retrieval</h3>
+                        <div class="endpoint-card">
+                            <span class="method method-get">GET</span>
+                            <span class="endpoint">/api/qa/{task_id}</span>
+                            <p>Get Q&A pairs for a task</p>
+                            <h5>Response Example:</h5>
+                            <div class="code-block">
+                                {<br>
+                                &nbsp;&nbsp;"task_id": "123e4567-e89b-12d3-a456-426614174000",<br>
+                                &nbsp;&nbsp;"qa_pairs": [<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;{<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"question": "How do I add a new feature to the application?",<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"answer": "To add a new feature, you would need to..."<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;},<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;{<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"question": "What is the architecture of the codebase?",<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"answer": "The codebase follows a modular architecture with..."<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                &nbsp;&nbsp;]<br>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Environment Variables</h2>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Variable</th>
+                                    <th>Description</th>
+                                    <th>Default</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>LLM_BASE_URL</td>
+                                    <td>Base URL for LLM API</td>
+                                    <td>https://api.example.com</td>
+                                </tr>
+                                <tr>
+                                    <td>LLM_API_KEY</td>
+                                    <td>API key for LLM service</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>LLM_INSTRUCT_MODEL</td>
+                                    <td>Model name for instruction following</td>
+                                    <td>instruct_model</td>
+                                </tr>
+                                <tr>
+                                    <td>LLM_REASONING_MODEL</td>
+                                    <td>Model name for reasoning tasks</td>
+                                    <td>reasoning_model</td>
+                                </tr>
+                                <tr>
+                                    <td>LLM_EMBEDDINGS_MODEL</td>
+                                    <td>Model name for embeddings generation</td>
+                                    <td>embeddings_model</td>
+                                </tr>
+                                <tr>
+                                    <td>OUTPUT_DIR</td>
+                                    <td>Output directory for documentation</td>
+                                    <td>documentation_output</td>
+                                </tr>
+                                <tr>
+                                    <td>TEMP_DIR</td>
+                                    <td>Temporary directory for processing</td>
+                                    <td>/tmp/code_documentation</td>
+                                </tr>
+                                <tr>
+                                    <td>LOG_LEVEL</td>
+                                    <td>Logging level</td>
+                                    <td>INFO</td>
+                                </tr>
+                                <tr>
+                                    <td>API_HOST</td>
+                                    <td>Host to bind the API server</td>
+                                    <td>0.0.0.0</td>
+                                </tr>
+                                <tr>
+                                    <td>API_PORT</td>
+                                    <td>Port to bind the API server</td>
+                                    <td>8000</td>
+                                </tr>
+                                <tr>
+                                    <td>API_WORKERS</td>
+                                    <td>Number of worker processes</td>
+                                    <td>4</td>
+                                </tr>
+                                <tr>
+                                    <td>API_DEBUG</td>
+                                    <td>Enable debug mode</td>
+                                    <td>false</td>
+                                </tr>
+                                <tr>
+                                    <td>API_CORS_ORIGINS</td>
+                                    <td>Allowed CORS origins</td>
+                                    <td>*</td>
+                                </tr>
+                                <tr>
+                                    <td>API_RATE_LIMIT</td>
+                                    <td>Rate limit for API requests</td>
+                                    <td>100</td>
+                                </tr>
+                                <tr>
+                                    <td>VECTOR_DB_PATH</td>
+                                    <td>Path to vector database for RAG</td>
+                                    <td>vector_db</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer text-center">
+            <p>Code Documentation Application &copy; 2025</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
