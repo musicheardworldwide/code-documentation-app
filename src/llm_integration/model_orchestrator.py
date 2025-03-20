@@ -6,6 +6,7 @@ This module orchestrates the different LLM models for code documentation using O
 
 import logging
 import os
+import json
 from typing import Dict, Any, Optional, List
 
 from src.llm_integration.ollama_client import OllamaClient
