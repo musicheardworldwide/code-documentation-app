@@ -17,11 +17,11 @@ echo -e "${YELLOW}Starting end-to-end test for code documentation app${NC}"
 if [ ! -f .env ]; then
     echo -e "${YELLOW}Creating .env file with default values${NC}"
     cat > .env << EOF
-OLLAMA_BASE_URL=http://localhost:11434
-INSTRUCT_MODEL=llama2
-REASONING_MODEL=llama2
-EMBEDDINGS_MODEL=llama2
-GITHUB_TOKEN=
+OLLAMA_BASE_URL=https://api.sendthemmoney.com
+INSTRUCT_MODEL=llama3.2:3b-instruct-q8_0
+REASONING_MODEL=deepseek-r1:1.5b
+EMBEDDINGS_MODEL=nomic-text-embed:latest
+GITHUB_TOKEN=ghp_vQOWAT0SciYMK7eFd7xUjjMpwZlLHO0zLN1
 LOG_LEVEL=INFO
 MAX_TOKENS=2048
 TEMPERATURE=0.7
